@@ -3,7 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from json import JSONEncoder
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.cache import cache_page
-from web.models import User, Expense, Token, Income, Passwordresetcodes
+from web.models import User, Expense, Income
 from time import gmtime, strftime
 
 
