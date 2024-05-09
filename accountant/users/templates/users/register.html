@@ -1,10 +1,16 @@
 {% extends "users/base.html" %}
 {% block title %} Register Page {% endblock title%}
 {% block content %}
+<script src='https://www.google.com/recaptcha/api.js'></script>
     <div class="form-content my-3 p-3">
 		<div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7">
+                    {% if message %}
+                        <div class="font-weight-light my-4 text-center">
+                          <h5>{{ message|safe }}</h5>
+                        </div>
+                    {% endif %}
                     <div class="card shadow-lg border-0 rounded-lg mt-0 mb-5">
                         <div class="card-header justify-content-center">
                         	<h3 class="font-weight-light my-4 text-center">Create Account</h3>
@@ -67,6 +73,10 @@
                                             {{ form.password2 }}
                                         </div>
                                     </div>
+                                    <!-- <div class="col-md-6">
+                                        <script src='https://www.google.com/recaptcha/api.js'></script>
+                                        <div class="g-recaptcha" data-sitekey="6LfIxdQpAAAAAAf4RAzNyWMBYOQi0fJiBLIRft1v"></div>
+                                    </div> -->
                                 </div>
                                 <div class="form-group mt-4 mb-0">
                                     <button type="submit" class="col-md-12 btn btn-dark">Sign Up</button><br><br>

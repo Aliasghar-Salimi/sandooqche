@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from django.contrib.auth import views as auth_views
-from users.views import CustomLoginView, RegisterView
+from users.views import CustomLoginView
 from users.forms import LoginForm
 
 urlpatterns = [
