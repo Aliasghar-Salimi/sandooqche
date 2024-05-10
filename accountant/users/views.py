@@ -64,14 +64,9 @@ class RegisterView(View):
             return render(request, self.template_name, context)
         
         if form.is_valid():
-            # if not grecaptcha_verify(request):  # captcha was not correct
-            #     # context = {
-            #     #     'message': 'captcha was not crrect, refill the form and do the captcha, please'}
-            #     # return render(request, 'users/register.html', context)
-            #     message = 'captcha was not crrect, refill the form and do the captcha, please'
-            #     messages.error(request, message)
-            # else:
-            #     this_user = form.save()
+            if not grecaptcha_verify(request):  # captcha was not correct
+                message = 'captcha was not crrect, refill the form and do the captcha, please'
+                messages.error(request, message)
             this_user = form.save()
 
             this_token = create_token()
@@ -104,10 +99,6 @@ class CustomLoginView(LoginView):
         # else browser session will be as long as the session cookie time "SESSION_COOKIE_AGE" defined in settings.py
         return super(CustomLoginView, self).form_valid(form)    
     
-    # def get_success_url(self):
-    #     message = 'you successfuly loged in :)'
-    #     return super().get_success_url()
-    
     def post(self, request):
         
         if 'username' and 'password' in request.POST:
@@ -133,39 +124,4 @@ class CustomLoginView(LoginView):
                     return JsonResponse(context ,JSONEncoder)
                                 
         return super(CustomLoginView, self).post(request)
-
-            # return super(CustomLoginView, self).form_valid(form)
-
-                # if not Token.objects.filter(user=this_user).exists():
-                #     token = create_token()
-                #     this_token = Token.objects.create(user=this_user, token=token)
-                #     return JsonResponse({'token': this_token.token}, encoder=JSONEncoder)
-                # else:
-                #     try:
-                #         this_token = get_object_or_404(Token, user=this_user)
-                #         return JsonResponse({'token': this_token.token}, encoder=JSONEncoder)
-                #     except Http404:
-                #         return JsonResponse({'token': this_token.token}, encoder=JSONEncoder)
-
-                
-                
-                # global this_token
-                # try:        
-                #     this_token = get_object_or_404(Token, user=this_user)
-                # except http404:
-                #     token = create_token()
-                #     this_token = Token.objects.create(user=this_user, token=token)
-
-        # login(request, this_user)
-        # this_token, _ = Token.objects.get_or_create(user=this_user)
-
-        
-        # if user is not None:
-        #     login(request, user)
-        #     token = create_token()
-        #     Token.objects.create(user=user, token=token)
-        #     return super(CustomLoginView, self).form_valid(form)
-        # else:
-        #     # Handle invalid login attempt
-        #     return JsonResponse({'error': 'Invalid credentials'}, status=401)
 
