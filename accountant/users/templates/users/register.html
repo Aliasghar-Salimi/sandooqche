@@ -1,96 +1,167 @@
-{% extends "users/base.html" %}
-{% block title %} Register Page {% endblock title%}
-{% block content %}
-<script src='https://www.google.com/recaptcha/api.js'></script>
-    <div class="form-content my-3 p-3">
-		<div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-7">
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!--Font awesome icons -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{% static 'register/fonts/material-icon/css/material-design-iconic-font.min.css' %} ">
+<!--===============================================================================================-->	
+<link rel="icon" type="image/png" href="{% static 'login/images/icons/favicon.ico' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/fonts/iconic/css/material-design-iconic-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/animate/animate.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/daterangepicker/daterangepicker.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'login/css/main.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'login/css/rtl.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'login/css/size.css' %}">
+
+    <!-- Main css -->
+<link rel="stylesheet" href="{% static 'register/css/style.css' %}">
+
+</head>
+<body>
+
+    <div class="main">
+
+        <section class="signup">
+            <!-- <img src="images/signup-bg.jpg" alt=""> -->
+            <div class="container">
+                <div class="signup-content">
                     {% if message %}
                         <div class="font-weight-light my-4 text-center">
                           <h5>{{ message|safe }}</h5>
                         </div>
                     {% endif %}
-                    <div class="card shadow-lg border-0 rounded-lg mt-0 mb-5">
-                        <div class="card-header justify-content-center">
-                        	<h3 class="font-weight-light my-4 text-center">Create Account</h3>
+                    <form method="POST" id="signup-form" class="signup-form">
+                        {% csrf_token %}
+                        {% if form.errors %}
+                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                <div id="form_errors">
+                                    {% for key, value in form.errors.items %}
+                                        <strong>{{ value }}</strong>
+                                    {% endfor %}
+                                </div>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {% endif %}
+                        <h2 class="login100-form-title p-b-26 myfont">ایجاد حساب</h2>
+                                <div class="form-group">
+                                    {{ form.first_name|add_class:"input100" }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.last_name|add_class:"input100" }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.username|add_class:"input100"|remove_attr:"autofocus" }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.email|add_class:"input100" }}
+                                </div>
+                                <div class="wrap-input100 validate-input" data-validate="Enter password">
+                                    <span class="btn-show-pass">
+                                        <i class="zmdi zmdi-eye "></i>
+                                    </span>
+                                    {{ form.password1|add_class:"input100" }}
+                                    {{ form.errors.password }}
+                                </div>
+                                <div class="wrap-input100 validate-input" data-validate="Enter password">
+                                    <span class="btn-show-pass">
+                                        <i class="zmdi zmdi-eye "></i>
+                                    </span>
+                                    {{ form.password2|add_class:"input100" }}
+                                </div>
+                            <!-- <div class="col-md-6">
+                                <script src='https://www.google.com/recaptcha/api.js'></script>
+                                <div class="g-recaptcha" data-sitekey="6LfIxdQpAAAAAAf4RAzNyWMBYOQi0fJiBLIRft1v"></div>
+                            </div> -->
                         </div>
-                        <div class="card-body">
-                            <form method="POST">
-                                {% csrf_token %}
-                                {% if form.errors %}
-                                    <div class="alert alert-danger alert-dismissible" role="alert">
-                                        <div id="form_errors">
-                                            {% for key, value in form.errors.items %}
-                                                <strong>{{ value }}</strong>
-                                            {% endfor %}
-                                        </div>
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                {% endif %}
-                                <div class="form-row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="small mb-1">First Name</label>
-                                            {{ form.first_name }}
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="small mb-1">Last Name</label>
-                                            {{ form.last_name }}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="col-md-6">
-		                                <div class="form-group">
-		                                	<label class="small mb-1">Username</label>
-		                                    {{ form.username }}
-		                                </div>
-		                            </div>
-                                    <div class="col-md-6">
-		                                <div class="form-group">
-		                                	<label class="small mb-1">Email</label>
-		                                    {{ form.email }}
-		                                </div>
-		                            </div>
-		                        </div>
-                                <div class="form-row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="small mb-1">Password</label>
-                                            {{ form.password1 }}
-                                            {{ form.errors.password }}
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-
-                                        <div class="form-group">
-                                            <label class="small mb-1">Confirm Password</label>
-                                            {{ form.password2 }}
-                                        </div>
-                                    </div>
-                                    <!-- <div class="col-md-6">
-                                        <script src='https://www.google.com/recaptcha/api.js'></script>
-                                        <div class="g-recaptcha" data-sitekey="6LfIxdQpAAAAAAf4RAzNyWMBYOQi0fJiBLIRft1v"></div>
-                                    </div> -->
-                                </div>
-                                <div class="form-group mt-4 mb-0">
-                                    <button type="submit" class="col-md-12 btn btn-dark">Sign Up</button><br><br>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="card-footer text-center">
-                            <div class="small">
-                                <a href="{% url 'login' %}">Have an account? Go to Sign in</a>
+                        <div class="container-login100-form-btn">
+                            <div class="wrap-login100-form-btn">
+                                <div class="login100-form-bgbtn"></div>
+                                <button class="login100-form-btn myfont">
+                                    ثبت نام
+                                </button>
                             </div>
                         </div>
-                    </div>
+                    </form>
+                    <!-- <form method="POST" id="signup-form" class="signup-form">
+                        <h2 class="form-title">Create account</h2>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="name" id="name" placeholder="Your Name"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-input" name="email" id="email" placeholder="Your Email"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="password" id="password" placeholder="Password"/>
+                            <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-input" name="re_password" id="re_password" placeholder="Repeat your password"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+                            <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up"/>
+                        </div>
+                    </form> -->
                 </div>
             </div>
-        </div>
-	</div>
-{% endblock content %}
+        </section>
+        
+    </div>
+    <p class="loginhere myfont">
+        آیا حساب کربری دارید؟ <a href="{% url 'login' %}" class="loginhere-link myfont">ورود به حساب</a>
+    </p>
+    
+    <!-- JS -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
+    <!--===============================================================================================-->
+	<script src="{% static 'login/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+    <!--===============================================================================================-->
+        <script src="{% static 'login/vendor/animsition/js/animsition.min.js' %}"></script>
+    <!--===============================================================================================-->
+        <script src="{% static 'login/vendor/bootstrap/js/popper.js' %}"></script>
+        <script src="{% static 'login/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+    <!--===============================================================================================-->
+        <script src="{% static 'login/vendor/select2/select2.min.js' %}"></script>
+    <!--===============================================================================================-->
+        <script src="{% static 'login/vendor/daterangepicker/moment.min.js' %}"></script>
+        <script src="{% static 'login/vendor/daterangepicker/daterangepicker.js' %}"></script>
+    <!--===============================================================================================-->
+        <script src="{% static 'login/vendor/countdowntime/countdowntime.js' %}"></script>
+    <!--===============================================================================================-->
+        <script src="{% static 'login/js/main.js' %}"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>
