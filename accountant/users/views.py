@@ -75,7 +75,7 @@ class RegisterView(View):
             Token.objects.create(user=this_user, token=this_token)
 
             username = form.cleaned_data.get('username')
-            messages.success(request, f'''حساب برای {username} ایجاد شد. توکن شما {this_token}است. آن را ذخیره کنید. برای ادامه فرایند لطفا وارد حساب خود شوید:)''')
+            messages.success(request, f'''حساب برای {username} ایجاد شد. توکن شما "{this_token}" است. آن را ذخیره کنید. برای ادامه فرایند لطفا وارد حساب خود شوید:)''')
             return redirect(to='login')
 
         return render(request, self.template_name, {'form': form})
