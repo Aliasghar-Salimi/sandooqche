@@ -61,21 +61,21 @@ class RegisterView(View):
                 'message': '''متاسفانه این ایمیل قبلا استفاده شده است. در صورتی که این ایمیل شما است،
                              از صفحه ورود گزینه فراموشی پسورد رو انتخاب کنین. ببخشید که فرم ذخیره نشده. درست می شه'''}  # TODO: forgot password
             # TODO: keep the form data
+            context['form'] = form
             return render(request, self.template_name, context)
         
         if form.is_valid():
-            if not grecaptcha_verify(request):  # captcha was not correct
-                message = 'captcha was not crrect, refill the form and do the captcha, please'
-                messages.error(request, message)
+            # if not grecaptcha_verify(request):  # captcha was not correct
+            #     message = 'کپچای گوگل درست وارد نشده بود'
+            #     messages.error(request, message)
+
             this_user = form.save()
 
             this_token = create_token()
             Token.objects.create(user=this_user, token=this_token)
 
             username = form.cleaned_data.get('username')
-            messages.success(request, f'''Account created for {username}, this is your token {this_token}.
-                              please remember it, submit expences and incomes dipends on it :)''')
-            
+            messages.success(request, f'''حساب برای {username} ایجاد شد. توکن شما "{this_token}" است. آن را ذخیره کنید. برای ادامه فرایند لطفا وارد حساب خود شوید:)''')
             return redirect(to='login')
 
         return render(request, self.template_name, {'form': form})
@@ -106,6 +106,12 @@ class CustomLoginView(LoginView):
             password = request.POST.get('password')
             this_user = User.objects.get(username=username)
             
+            # if not User.objects.filter(username=username).exists():
+            #     context = {
+            #         'message': 'username is invalid!!'
+            #     }
+            #     return render(request, self.template_name, context)
+            
             if check_password(password, this_user.password):
 
                 if not Token.objects.filter(user=this_user).exists():
@@ -116,12 +122,6 @@ class CustomLoginView(LoginView):
                         'message': f'your token created, it\'s "{this_token.token}" please remember it, it never shown again'
                     }
                     return JsonResponse(context ,JSONEncoder)
-                else:
-                    this_token = get_object_or_404(Token, user=this_user)
-                    context = {
-                        'message': f'your token is \'{this_token.token}\' please remember it'
-                    }
-                    return JsonResponse(context ,JSONEncoder)
-                                
+
         return super(CustomLoginView, self).post(request)
 

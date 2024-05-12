@@ -27,6 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+GOOGLE_RECAPTCHA_SECRET_KEY = "6LfIxdQpAAAAAGGnOlntkP5SJuW5SfHHwaCZ1Ee0"
+
+
+LOGIN_REDIRECT_URL = 'users:users-home'
+LOGIN_URL = 'login'
 
 # Application definition
 
@@ -37,7 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'web'
+    'web',
+    'users',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
