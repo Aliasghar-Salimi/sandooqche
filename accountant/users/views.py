@@ -66,7 +66,7 @@ class RegisterView(View):
         
         if form.is_valid():
             # if not grecaptcha_verify(request):  # captcha was not correct
-            #     message = 'captcha was not crrect, refill the form and do the captcha, please'
+            #     message = 'کپچای گوگل درست وارد نشده بود'
             #     messages.error(request, message)
 
             this_user = form.save()
