@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'web',
     'users',
     'widget_tweaks',
+    'snowpenguin.django.recaptcha2',
+    
 ]
 
 MIDDLEWARE = [
