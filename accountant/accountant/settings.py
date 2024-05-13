@@ -36,6 +36,7 @@ LOGIN_URL = 'login'
 # Application definition
 
 INSTALLED_APPS = [
+	'multi_captcha_admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,9 +46,15 @@ INSTALLED_APPS = [
     'web',
     'users',
     'widget_tweaks',
-    'snowpenguin.django.recaptcha2',
-    
+    'captcha',    
 ]
+
+RECAPTCHA_PRIVATE_KEY = '6LfIxdQpAAAAAGGnOlntkP5SJuW5SfHHwaCZ1Ee0'
+RECAPTCHA_PUBLIC_KEY = '6LfIxdQpAAAAAAf4RAzNyWMBYOQi0fJiBLIRft1v'
+
+MULTI_CAPTCHA_ADMIN = {
+    'engine': 'simple-captcha',
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

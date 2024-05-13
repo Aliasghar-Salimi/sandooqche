@@ -29,3 +29,7 @@ urlpatterns = [
                                            authentication_form=LoginForm), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
 ]
+
+urlpatterns += [
+    path('captcha/', include('captcha.urls')),
+]
