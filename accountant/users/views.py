@@ -99,29 +99,4 @@ class CustomLoginView(LoginView):
         # else browser session will be as long as the session cookie time "SESSION_COOKIE_AGE" defined in settings.py
         return super(CustomLoginView, self).form_valid(form)    
     
-    def post(self, request):
-        
-        if 'username' and 'password' in request.POST:
-            username = request.POST.get('username')
-            password = request.POST.get('password')
-            this_user = User.objects.get(username=username)
-            
-            # if not User.objects.filter(username=username).exists():
-            #     context = {
-            #         'message': 'username is invalid!!'
-            #     }
-            #     return render(request, self.template_name, context)
-            
-            if check_password(password, this_user.password):
-
-                if not Token.objects.filter(user=this_user).exists():
-                    token = get_random_string(48)
-                    this_token = Token.objects.create(user=this_user, token=token)
-                    this_token.save()
-                    context = {
-                        'message': f'your token created, it\'s "{this_token.token}" please remember it, it never shown again'
-                    }
-                    return JsonResponse(context ,JSONEncoder)
-
-        return super(CustomLoginView, self).post(request)
 
