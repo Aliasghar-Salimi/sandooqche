@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'web',
     'users',
     'widget_tweaks',
-    'captcha',    
+    'captcha',
 ]
 
 RECAPTCHA_PRIVATE_KEY = '6LfIxdQpAAAAAGGnOlntkP5SJuW5SfHHwaCZ1Ee0'

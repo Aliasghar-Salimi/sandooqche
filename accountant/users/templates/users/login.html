@@ -45,6 +45,7 @@
 	<link rel="stylesheet" href="{% static 'register/css/size.css' %}">
 	<link rel="stylesheet" href="{% static 'register/css/background.css' %}">
 	<link rel="stylesheet" href="{% static 'register/css/message.css' %}">
+	<link rel="stylesheet" href="{% static 'register/css/message2.css' %}">
 	<link rel="stylesheet" href="{% static 'register/css/position.css' %}">
 <!--===============================================================================================-->
 </head>
@@ -104,6 +105,9 @@
 						{% endif %}		
 						<span class="focus-input100" data-placeholder="گذرواژه"></span>
 					</div>
+					<div class="wrap-input100">
+						{{ form.captcha }}
+					</div>
 					<div class="form-row">
 						<div class="col-md-10 offset-md-1">
 							<div class="form-group">
@@ -124,7 +128,7 @@
 				</form>
 				<div class="form-row ">
 					<p class="loginhere  myfont">
-						آیا حساب کربری ندارید؟ <a href="{% url 'login' %}" class="loginhere-link myfont">ایجاد حساب</a>
+						آیا حساب کاربری ندارید؟ <a href="{% url 'users:users-register' %}" class="loginhere-link myfont">ایجاد حساب</a>
 					</p>
 				</div>
 			</div>

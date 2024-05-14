@@ -4,8 +4,12 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 from .models import Profile
 
+from captcha.fields import CaptchaField
 
 class RegisterForm(UserCreationForm):
+    # recaptcha
+    captcha = CaptchaField()
+
     # fields we want to include and customize in our form
     first_name = forms.CharField(max_length=100,
                                  required=True,
@@ -48,6 +52,10 @@ class RegisterForm(UserCreationForm):
 
 
 class LoginForm(AuthenticationForm):
+    # recaptcha
+    captcha = CaptchaField()
+    
+    # other fields
     username = forms.CharField(max_length=100,
                                required=True,
                                widget=forms.TextInput(attrs={'class': 'form-control',}))

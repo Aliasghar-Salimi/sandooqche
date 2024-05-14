@@ -1,7 +1,6 @@
 @import url('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css');
 
 .info-msg,
-.success-msg,
 .warning-msg,
 .error-msg {
   margin: 10px 0;
@@ -12,10 +11,7 @@
   color: #059;
   background-color: #BEF;
 }
-.success-msg {
-  color: #270;
-  background-color: #DFF2BF;
-}
+
 .warning-msg {
   color: #9F6000;
   background-color: #FEEFB3;
@@ -31,7 +27,7 @@ body {
     line-height: 1.8;
     color: #222;
     font-weight: 400;
-    font-family: 'Montserrat';
+    font-family: 'Sahel';
     background-image: url(../images/signup-bg.jpg);
     background-repeat: no-repeat;
     background-size: cover;

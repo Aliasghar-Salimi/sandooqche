@@ -1,0 +1,17 @@
+.success-msg {
+    position: absolute;
+    top: 50px;
+    margin: 7px 60px;
+    border-radius: 8px 8px 8px 8px;
+    font-family: 'Sahel';
+    line-height: 2;
+    padding: 10px;
+    font-weight: 60;
+    color: #270;
+    background-color: #DFF2BF;
+    left: 70px;
+}
+.wrap-login100 {
+    top: 150px;
+    position: absolute;
+}
