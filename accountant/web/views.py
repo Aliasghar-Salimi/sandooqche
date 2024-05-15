@@ -88,3 +88,48 @@ def generalstat(request):
 
     return JsonResponse(context, encoder=JSONEncoder)
 
+
+@csrf_exempt
+@require_POST
+def edit_expense(request):
+
+    """edit an expense"""
+
+    this_token = request.POST['token']
+    this_user = get_object_or_404(User, token__token=this_token)
+    this_pk = request.POST['id']
+    this_expense = get_object_or_404(Expense, pk=this_pk, user=this_user)
+    this_text = request.POST['text'] if 'text' in request.POST else this_expense.text
+    this_amount = request.POST['amount'] if 'amount' in request.POST else this_expense.amount
+    
+    this_expense.text = this_text
+    this_expense.amount = this_amount
+    this_expense.save()
+
+    return JsonResponse({
+        'status': 'ok',
+    }, encoder=JSONEncoder)
+
+
+@csrf_exempt
+@require_POST
+def edit_income(request):
+
+    """edit an income"""
+
+    this_token = request.POST['token']
+    this_user = get_object_or_404(User, token__token=this_token)
+    this_pk = request.POST['id']
+    this_income = get_object_or_404(Income, pk=this_pk, user=this_user)
+    this_text = request.POST['text'] if 'text' in request.POST else this_income.text
+    this_amount = request.POST['amount'] if 'amount' in request.POST else this_income.amount
+    
+    this_income.text = this_text
+    this_income.amount = this_amount
+    this_income.save()
+
+    return JsonResponse({
+        'status': 'ok',
+    }, encoder=JSONEncoder)
+
+
