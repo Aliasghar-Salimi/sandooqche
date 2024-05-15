@@ -27,18 +27,34 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+GOOGLE_RECAPTCHA_SECRET_KEY = ""
+
+
+LOGIN_REDIRECT_URL = 'users:users-home'
+LOGIN_URL = 'login'
 
 # Application definition
 
 INSTALLED_APPS = [
+	'multi_captcha_admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'web'
+    'web',
+    'users',
+    'widget_tweaks',
+    'captcha',
 ]
+
+RECAPTCHA_PRIVATE_KEY = ''
+RECAPTCHA_PUBLIC_KEY = '6LfIxdQpAAAAAAf4RAzNyWMBYOQi0fJiBLIRft1v'
+
+MULTI_CAPTCHA_ADMIN = {
+    'engine': 'simple-captcha',
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

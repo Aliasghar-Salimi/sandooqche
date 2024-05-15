@@ -27,8 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-GOOGLE_RECAPTCHA_SECRET_KEY = "6LfIxdQpAAAAAGGnOlntkP5SJuW5SfHHwaCZ1Ee0"
-
 
 LOGIN_REDIRECT_URL = 'users:users-home'
 LOGIN_URL = 'login'
@@ -48,9 +46,6 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'captcha',
 ]
-
-RECAPTCHA_PRIVATE_KEY = '6LfIxdQpAAAAAGGnOlntkP5SJuW5SfHHwaCZ1Ee0'
-RECAPTCHA_PUBLIC_KEY = '6LfIxdQpAAAAAAf4RAzNyWMBYOQi0fJiBLIRft1v'
 
 MULTI_CAPTCHA_ADMIN = {
     'engine': 'simple-captcha',
