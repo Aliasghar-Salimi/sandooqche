@@ -8,4 +8,5 @@ urlpatterns = [
     path('query/expenses/', views.query_expenses, name='query_expenses'),
     path('query/incomes/', views.query_incomes, name='query_incomes'),
     path('generalstat/', views.generalstat, name='generalstat'),
+    
 ]

@@ -28,9 +28,6 @@ from .models import Token
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
-from web.models import Expense, Income
-from django.core import serializers
-
 # Creating a token containing 48 charecter
 
 import string, random
@@ -126,26 +123,4 @@ def whoami(request):
             'message': 'please send the token too!',
         }, encoder=JSONEncoder) 
 
-
-# return General Status of a user as Json (income,expense)
-
-@csrf_exempt
-@require_POST
-def query_expenses(request):
-    this_token = request.POST['token']
-    num = request.POST.get('num', 10)
-    this_user = get_object_or_404(User, token__token=this_token)
-    expenses = Expense.objects.filter(user=this_user).order_by('-date')[:num]
-    expenses_serialized = serializers.serialize("json", expenses)
-    return JsonResponse(expenses_serialized, encoder=JSONEncoder, safe=False)
-
-@csrf_exempt
-@require_POST
-def query_incomes(request):
-    this_token = request.POST['token']
-    num = request.POST.get('num', 10)
-    this_user = get_object_or_404(User, token__token=this_token)
-    expenses = Income.objects.filter(user=this_user).order_by('-date')[:num]
-    expenses_serialized = serializers.serialize("json", expenses)
-    return JsonResponse(expenses_serialized, encoder=JSONEncoder, safe=False)
 

@@ -43,7 +43,7 @@ def submit_income(request):
                            user=this_user, date=date)
     
     print(request.POST)
-    
+
     return JsonResponse({'status':'working'}, encoder=JSONEncoder)
 
 # return General Status of a user as Json (income,expense)
