@@ -1,23 +1,55 @@
 {% extends "users/base.html" %}
-{% block title %} Home Page {% endblock title%}
+{% block title %} sandooqche {% endblock title%}
 {% block content %}
     <div class="jumbotron">
-        <h1 class="display-4">Welcome, {{user.first_name.title|default:'Guest'}}</h1>
-        <p class="lead">
-            This is <b>user registration and login system</b> build with django which is
-            a Python-based free and open-source web framework that follows the model–template–views architectural pattern.
-        </p>
-        <hr class="my-4">
-        <p class="lead">
-            {% if user.is_authenticated %}
-                <form method="post" action="{% url 'logout' %}">
-                    {% csrf_token %}
-                    <button class="btn btn-primary btn-lg" type="submit">logout</button>
-                </form>
-            {% else %}
-                <a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button">Sign in</a>
-            {% endif %}
-        </p>
+        <header>
+            <h1 class="display-4">صندوقچه</h1>
+            <hr>
+        </header>
+        <div class="income-expense-container">
+            <div>
+                {% if expenses %}
+                    <h3>هزینه‌های شما</h3>
+                    <div class="expenses-container">
+                        {% for expense in expenses %}
+                            <div class="expense-item">
+                                <h5>دلیل خرج: {{ expense.text }}</h4>
+                                <h6>میزان خرج (به تومان): {{ expense.amount }}</h5>
+                                <h6>تاریخ خرج: {{ expense.jalalitime }}</h5>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div>
+                {% if incomes %}
+                    <h3>درآمدهای شما</h3>
+                    <div class="incomes-container">
+                        {% for income in incomes %}
+                            <div class="expense-item">
+                                <h5>دلیل درآمد: {{ income.text }} </h4>
+                                <h6>میزان درآمد (به تومان): {{ income.amount }}</h5>
+                                <h6>تاریخ درآمد: {{ income.jalalitime }}</h5>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="btn1">
+            <p class="lead">
+                <hr>
+                {% if user.is_authenticated %}
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button class="btn btn-primary btn-lg" type="submit">خروج</button>
+                    </form>
+                {% else %}
+                    <a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button">ورود</a>
+                {% endif %}
+            </p>
+        </div>
     </div>
 
 {% endblock content %}
