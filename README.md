@@ -1,7 +1,7 @@
 
 # sandooqche - A Django Accounting System
 
-MyMoney is a web-based accounting system built with Django that allows users to track their expenses and incomes. It provides features to:
+sandooqche is a web-based accounting system built with Django that allows users to track their expenses and incomes. It provides features to:
 
  - Submit new expenses and incomes
  - View a list of all past transactions
