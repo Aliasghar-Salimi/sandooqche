@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 import re
+
+from extentions.utils import jalali_converter
 # Create your models here.
 
 class Expense(models.Model):
@@ -14,6 +16,9 @@ class Expense(models.Model):
         newtext = re.sub(pattern,"" , text)
         return newtext
 
+    def jalalitime(self):
+        return jalali_converter(self.date)
+
 class Income(models.Model):
     text = models.CharField(max_length=200)
     date = models.DateTimeField()
@@ -24,5 +29,9 @@ class Income(models.Model):
         text = "'{}' {}|\"{}\" {}".format(self.user, self.date,self.text, self.amount)
         pattern = r'(\+00:00)'
         newtext = re.sub(pattern,"" , text)
-        return newtext    
+        return newtext 
+       
+    def jalalitime(self):
+        return jalali_converter(self.date)
+
 
