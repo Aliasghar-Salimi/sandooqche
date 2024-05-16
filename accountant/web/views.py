@@ -34,13 +34,13 @@ def submit_expense(request):
 @csrf_exempt
 @cache_page(60 * 15)
 def submit_income(request):
+    now = strftime("%Y-%m-%d %H:%M:%S", gmtime())
+    if 'date' not in request.POST:
+        date = now
     this_token = request.POST['token']
     this_user = User.objects.filter(token__token=this_token).get()
-    if 'date' not in request.POST:
-        date = strftime("%Y-%m-%d %H:%M:%S", gmtime())
-
-    Income.objects.create(text=request.POST['text'], amount=request.POST['amount'], 
-                           user=this_user, date=date)
+    Income.objects.create(user=this_user, amount=request.POST['amount'], 
+                           text=request.POST['text'], date=date)
     
     print(request.POST)
 
