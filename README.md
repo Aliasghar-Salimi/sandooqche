@@ -6,6 +6,7 @@ sandooqche is a web-based accounting system built with Django that allows users 
  - Submit new expenses and incomes
  - View a list of all past transactions
  - Calculate the total sum of expenses and incomes
+
 This project utilizes cURL commands to interact with the API endpoints exposed by the Django application.
 
 ## Getting Started
