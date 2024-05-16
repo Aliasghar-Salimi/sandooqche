@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'users',
     'widget_tweaks',
     'captcha',
+    'extentions'
 ]
 
 MULTI_CAPTCHA_ADMIN = {

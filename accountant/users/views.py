@@ -36,8 +36,21 @@ create_token = lambda: ''.join(random.sample(char_set, 48))
 
 # Views
 
+from web.models import Expense, Income
 def home(request):
-    return render(request, 'users/home.html')
+    user = request.user
+
+    if user.is_authenticated:
+        expenses = Expense.objects.filter(user=user)
+        incomes = Income.objects.filter(user=user)
+    else:
+        expenses = None
+        incomes = None
+    context = {
+        'expenses': expenses,
+        'incomes': incomes,
+    }
+    return render(request, 'users/home.html', context)
 
 
 class RegisterView(View):
